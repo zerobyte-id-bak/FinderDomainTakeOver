@@ -27,8 +27,11 @@ FinderDomainTakeOver Used to takeover domain or subdomain
 ### Usage : 
 
 $ git clone https://github.com/zerobyte-id/FinderDomainTakeOver.git
+
 $ cd FinderDomainTakeOver/
+
 $ chmod +x finder
+
 $ ./finder --help
 
 <img src="FinderExample.png">
