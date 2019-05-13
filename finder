@@ -1,0 +1,91 @@
+#!/bin/bash
+# Finder TakeOver Domain / Subdomain
+# Zerobyte.ID 2019
+
+# Warna
+HIJAU='\033[0;32m'
+MERAH='\033[01;31m'
+NORMAL='\033[0m'
+CYAN='\033[0;36m'
+BIRU='\033[0;34m'
+PUTIH='\033[1;37m'
+
+UserAgent="Mozilla/5.0 (Linux; Android 7.0; SAMSUNG SM-N920C Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/6.2 Chrome/56.0.2924.87 Mobile Safari/537.36"
+
+dir=$(pwd | sed 's#.*/##')
+lo=$(whoami)
+
+listURL(){
+	IFS=$'\n'
+	for uRl in $(cat $1); do
+		echo "$uRl [Scanning] . . . . . "
+		for vuln in $(cat vuln.txt); do
+			string=$(echo $vuln | cut -d ':' -f 1)
+			engine=$(echo $vuln | cut -d ':' -f 2)
+			cEkTarget=$(curl -Ls -A "${UserAgent}" "$uRl");
+			if [[ $cEkTarget =~ "${string}" ]]; then
+				printf "${HIJAU}${engine} VULNERABLE [OK]\n"
+			else
+				printf "${MERAH}${engine} NOT VULNERABLE [BAD]\n"
+			fi
+		done
+		printf ${NORMAL}
+	done
+}
+
+targetURL(){
+	IFS=$'\n'
+	echo "$1 [Scanning] . . . . . "
+	for vuln in $(cat vuln.txt); do
+		string=$(echo $vuln | cut -d ':' -f 1)
+		engine=$(echo $vuln | cut -d ':' -f 2)
+		cEkTarget=$(curl -Ls -A "${UserAgent}" "$1");
+		if [[ $cEkTarget =~ "${string}" ]]; then
+			printf "${HIJAU}${engine} VULNERABLE [OK]\n"
+		else
+			printf "${MERAH}${engine} NOT VULNERABLE [BAD]\n"
+		fi
+	done
+}
+
+case $1 in
+     --help)
+        printf ${CYAN}
+        cat banner
+        printf ${NORMAL}
+        echo ""
+        echo "[${lo}]@${dir}$ $0 --help"
+        echo " Usage: $0 [OPTION]... [URL/LIST]..."
+        echo ""
+        echo "  --help        print this help"
+        echo "  --target      URL input [https://www.example.com]"
+        echo "  --list        Input List URL [targetlist.txt]"
+        echo ""
+        ;;
+     --target)
+        printf ${CYAN}
+        cat banner
+        printf ${NORMAL}
+        echo ""
+        echo "[${lo}]@${dir}$ $0 --target $2"
+        if [[ -z $2 ]]; then
+        	echo " [!] Please insert your target domain.com"
+        else
+        	targetURL $2
+        fi
+        ;;
+     --list)
+        printf ${CYAN}
+        cat banner
+        printf ${NORMAL}
+        echo ""
+        echo "[${lo}]@${dir}$ $0 --list $2"
+        if [[ -z $2 ]]; then
+        	echo " [!] Please insert your list target targetlist.txt"
+        else
+        	listURL $2
+        fi
+        ;;
+     *)
+        $0 --help
+esac
