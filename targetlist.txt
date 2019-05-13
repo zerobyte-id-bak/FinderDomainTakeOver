@@ -1,0 +1,4 @@
+www.jet.com
+affiliates.jet.com
+www.affiliates.jet.com
+alfred-api.jet.com

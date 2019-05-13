@@ -1,0 +1,17 @@
+The specified bucket does not exist: AWS/S3
+Repository not found: Bitbucket
+The feed has not been found: Feedpress
+The thing you were looking for is no longer here, or never was: Ghost
+There isn't a GitHub Pages site here.: Github
+We could not find what you're looking for: Help Juice
+No settings were found for this company: Help Scout
+Uh oh. That page doesn't exist.: Intercom
+is not a registered InCloud YouTrack: JetBrains
+No Site For Domain: Kinsta
+It looks like you may have taken a wrong turn somewhere. Don't worry...it happens to all of us.: LaunchRock
+404 error unknown site!: Pantheon
+Project doesnt exist... yet!: Readme.io
+Whatever you were looking for doesn't currently exist at this address: Tumblr
+This UserVoice subdomain is currently available!: UserVoice
+Domain is not configured: Smartling
+You may have mistyped the address or the page may have moved.: Thinkific
